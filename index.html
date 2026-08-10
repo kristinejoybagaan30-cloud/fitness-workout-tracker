@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fitness Workout Tracker</title>
+
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         WELCOME PAGE
+    ========================== -->
+
+    <div id="welcomePage" class="welcome-page">
+
+        <div class="welcome-content">
+
+            <div class="badges">
+                <span class="badge">PRELIM</span>
+                <span class="badge">FINAL OUTPUT</span>
+                <span class="badge">ADBMS</span>
+            </div>
+
+            <h1>
+                Fitness Workout<br>
+                Tracker System
+            </h1>
+
+            <p>
+                A simple database system designed to help users
+                record workouts, manage exercises, and monitor
+                fitness progress.
+            </p>
+
+            <div class="tech-tags">
+                <span>7 Core Tables</span>
+                <span>3NF Normalized</span>
+                <span>PostgreSQL</span>
+            </div>
+
+            <button type="button" class="enter-btn" id="enterButton">
+                Enter System →
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         MAIN SYSTEM
+    ========================== -->
+
+    <div id="mainSystem" class="main-system">
+
+        <header class="header">
+
+            <div class="badges">
+                <span class="badge">PRELIM</span>
+                <span class="badge">FINAL OUTPUT</span>
+                <span class="badge">ADBMS</span>
+            </div>
+
+            <h1>Fitness Workout Tracker</h1>
+
+            <p>
+                A relational database system for managing
+                workout routines, exercises, workout records,
+                and fitness progress.
+            </p>
+
+            <div class="tech-tags">
+                <span>7 Core Tables</span>
+                <span>3NF</span>
+                <span>PostgreSQL</span>
+            </div>
+
+        </header>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="tabs" aria-label="System sections">
+
+            <button type="button"
+                    class="tab-btn active"
+                    data-tab="er-diagram">
+                01 ER Diagram
+            </button>
+
+            <button type="button"
+                    class="tab-btn"
+                    data-tab="normalized-schema">
+                02 Normalized Schema
+            </button>
+
+            <button type="button"
+                    class="tab-btn"
+                    data-tab="sql-script">
+                03 SQL Scripts
+            </button>
+
+            <button type="button"
+                    class="tab-btn"
+                    data-tab="report">
+                04 Report
+            </button>
+
+        </nav>
+
+
+        <!-- =========================
+             ER DIAGRAM
+        ========================== -->
+
+        <section id="er-diagram" class="tab-content active">
+
+            <div class="card erd-section">
+
+                <h2>Entity Relationship Diagram</h2>
+
+                <p>
+                    This ER diagram shows the tables, fields, keys,
+                    and relationships used in the Fitness Workout Tracker database.
+                </p>
+
+                <div class="erd-wrapper">
+
+                    <div class="erd-canvas">
+
+                        <svg class="erd-lines"
+                             viewBox="0 0 1100 720"
+                             preserveAspectRatio="none">
+
+                            <line x1="280" y1="120" x2="430" y2="120"></line>
+                            <text x="305" y="110">1</text>
+                            <text x="400" y="110">N</text>
+
+                            <line x1="155" y1="245" x2="155" y2="370"></line>
+                            <text x="165" y="265">1</text>
+                            <text x="165" y="355">N</text>
+
+                            <line x1="280" y1="160" x2="430" y2="610"></line>
+                            <text x="290" y="185">1</text>
+                            <text x="410" y="595">N</text>
+
+                            <line x1="555" y1="220" x2="555" y2="260"></line>
+                            <text x="565" y="235">1</text>
+                            <text x="565" y="255">N</text>
+
+                            <line x1="945" y1="220" x2="700" y2="260"></line>
+                            <text x="920" y="220">1</text>
+                            <text x="720" y="250">N</text>
+
+                            <line x1="280" y1="440" x2="430" y2="470"></line>
+                            <text x="300" y="440">1</text>
+                            <text x="400" y="465">N</text>
+
+                            <line x1="945" y1="220" x2="700" y2="470"></line>
+                            <text x="920" y="240">1</text>
+                            <text x="720" y="455">N</text>
+
+                        </svg>
+
+
+                        <div class="erd-entity users">
+                            <div class="erd-title">USERS</div>
+
+                            <div class="erd-field pk">
+                                <span>🔑 user_id</span>
+                                <small>SERIAL</small>
+                            </div>
+
+                            <div class="erd-field">
+                                <span>username</span>
+                                <small>VARCHAR(50)</small>
+                            </div>
+
+                            <div class="erd-field">
+                                <span>email</span>
+                                <small>VARCHAR(100)</small>
+                            </div>
+
+                            <div class="erd-field">
+                                <span>password_hash</span>
+                                <small>VARCHAR(255)</small>
+                            </div>
+
+                            <div class="erd-field">
+                                <span>created_at</span>
+                                <small>TIMESTAMP</small>
+                            </div>
+                        </div>
+
+
+                        <div class="erd-entity workout-routines">
+                            <div class="erd-title">WORKOUT_ROUTINES</div>
+
+                            <div class="erd-field pk">
+                                <span>🔑 routine_id</span>
+                                <small>SERIAL</small>
+                            </div>
+
+                            <div class="erd-field fk">
+                                <span>🔗 user_id</span>
+                                <small>INT</small>
+                            </div>
+
+                            <div class="erd-field">
+                                <span>routine_name</span>
+                                <small>VARCHAR(100)</small>
+                            </div>
+
+                            <div class="erd-field">
+                                <span>description</span>
+                                <small>TEXT</small>
+                            </div>
+                        </div>
+
+
+                        <div class="erd-entity exercises">
+                            <div class="erd-title">EXERCISES</div>
+
+                            <div class="erd-field pk">
+                                <span>🔑 exercise_id</span>
+                                <small>SERIAL</small>
+                            </div>
+
+                            <div class="erd-field">
+                                <span>exercise_name</span>
+                                <small>VARCHAR(100)</small>
+                            </div>
+
+                            <div class="erd-field">
+                                <span>muscle_group</span>
+                                <small>VARCHAR(50)</small>
+                            </div>
+
+                            <div class="erd-field">
+                                <span>equipment_needed</span>
+                                <small>VARCHAR(50)</small>
+                            </div>
+                        </div>
+
+
+                        <div class="erd-entity routine-exercises">
+                            <div class="erd-title">ROUTINE_EXERCISES</div>
+
+                            <div class="erd-field pk">
+                                <span>🔑 routine_exercise_id</span>
+                                <small>SERIAL</small>
+                            </div>
+
+                            <div class="erd-field fk">
+                                <span>🔗 routine_id</span>
+                                <small>INT</small>
+                            </div>
+
+                            <div class="erd-field fk">
+                                <span>🔗 exercise_id</span>
+                                <small>INT</small>
+                            </div>
+                        </div>
+
+
+                        <div class="erd-entity workout-logs">
+                            <div class="erd-title">WORKOUT_LOGS</div>
+
+                            <div class="erd-field pk">
+                                <span>🔑 log_id</span>
+                                <small>SERIAL</small>
+                            </div>
+
+                            <div class="erd-field fk">
+                                <span>🔗 user_id</span>
+                                <small>INT</small>
+                            </div>
+
+                            <div class="erd-field">
+                                <span>workout_date</span>
+                                <small>TIMESTAMP</small>
+                            </div>
+
+                            <div class="erd-field">
+                                <span>notes</span>
+                                <small>TEXT</small>
+                            </div>
+                        </div>
+
+
+                        <div class="erd-entity workout-sets">
+                            <div class="erd-title">WORKOUT_SETS</div>
+
+                            <div class="erd-field pk">
+                                <span>🔑 set_id</span>
+                                <small>SERIAL</small>
+                            </div>
+
+                            <div class="erd-field fk">
+                                <span>🔗 log_id</span>
+                                <small>INT</small>
+                            </div>
+
+                            <div class="erd-field fk">
+                                <span>🔗 exercise_id</span>
+                                <small>INT</small>
+                            </div>
+
+                            <div class="erd-field">
+                                <span>set_number</span>
+                                <small>INT</small>
+                            </div>
+
+                            <div class="erd-field">
+                                <span>reps</span>
+                                <small>INT</small>
+                            </div>
+
+                            <div class="erd-field">
+                                <span>weight_kg</span>
+                                <small>DECIMAL(5,2)</small>
+                            </div>
+                        </div>
+
+
+                        <div class="erd-entity user-progress">
+                            <div class="erd-title">USER_PROGRESS</div>
+
+                            <div class="erd-field pk">
+                                <span>🔑 progress_id</span>
+                                <small>SERIAL</small>
+                            </div>
+
+                            <div class="erd-field fk">
+                                <span>🔗 user_id</span>
+                                <small>INT</small>
+                            </div>
+
+                            <div class="erd-field">
+                                <span>weight_kg</span>
+                                <small>DECIMAL(5,2)</small>
+                            </div>
+
+                            <div class="erd-field">
+                                <span>body_fat_percentage</span>
+                                <small>DECIMAL(4,2)</small>
+                            </div>
+
+                            <div class="erd-field">
+                                <span>recorded_date</span>
+                                <small>TIMESTAMP</small>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="erd-legend">
+
+                    <h3>Relationship Cardinality</h3>
+
+                    <p><strong>1</strong> = One record</p>
+                    <p><strong>N</strong> = Many records</p>
+                    <p>🔑 = Primary Key</p>
+                    <p>🔗 = Foreign Key</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             NORMALIZED SCHEMA
+        ========================== -->
+
+        <section id="normalized-schema" class="tab-content">
+
+            <div class="card">
+
+                <h2>Normalization</h2>
+
+                <p>
+                    The database follows 1NF, 2NF, and 3NF
+                    to reduce duplicate data and keep
+                    information organized.
+                </p>
+
+            </div>
+
+            <div class="card nf-card">
+
+                <h3>1NF — First Normal Form</h3>
+
+                <p>
+                    Each field contains only one value and
+                    there are no repeating groups.
+                </p>
+
+            </div>
+
+            <div class="card nf-card">
+
+                <h3>2NF — Second Normal Form</h3>
+
+                <p>
+                    Non-key information depends on the
+                    complete primary key.
+                </p>
+
+            </div>
+
+            <div class="card nf-card">
+
+                <h3>3NF — Third Normal Form</h3>
+
+                <p>
+                    Non-key attributes depend only on the
+                    primary key. This helps avoid
+                    unnecessary duplicate data.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SQL SCRIPT
+        ========================== -->
+
+        <section id="sql-script" class="tab-content">
+
+            <div class="card">
+
+                <h2>Database SQL Scripts</h2>
+
+                <p>
+                    SQL commands used to create the
+                    Fitness Workout Tracker database.
+                </p>
+
+                <pre class="code-block"><code>CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE exercises (
+    exercise_id SERIAL PRIMARY KEY,
+    exercise_name VARCHAR(100) NOT NULL,
+    muscle_group VARCHAR(50) NOT NULL,
+    equipment_needed VARCHAR(50)
+);
+
+CREATE TABLE workout_routines (
+    routine_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    routine_name VARCHAR(100) NOT NULL,
+    description TEXT,
+    FOREIGN KEY (user_id)
+        REFERENCES users(user_id)
+);
+
+CREATE TABLE routine_exercises (
+    routine_exercise_id SERIAL PRIMARY KEY,
+    routine_id INT NOT NULL,
+    exercise_id INT NOT NULL,
+    FOREIGN KEY (routine_id)
+        REFERENCES workout_routines(routine_id),
+    FOREIGN KEY (exercise_id)
+        REFERENCES exercises(exercise_id)
+);
+
+CREATE TABLE workout_logs (
+    log_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    workout_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    notes TEXT,
+    FOREIGN KEY (user_id)
+        REFERENCES users(user_id)
+);
+
+CREATE TABLE workout_sets (
+    set_id SERIAL PRIMARY KEY,
+    log_id INT NOT NULL,
+    exercise_id INT NOT NULL,
+    set_number INT NOT NULL,
+    reps INT NOT NULL,
+    weight_kg DECIMAL(5,2),
+    FOREIGN KEY (log_id)
+        REFERENCES workout_logs(log_id),
+    FOREIGN KEY (exercise_id)
+        REFERENCES exercises(exercise_id)
+);
+
+CREATE TABLE user_progress (
+    progress_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    weight_kg DECIMAL(5,2),
+    body_fat_percentage DECIMAL(4,2),
+    recorded_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id)
+        REFERENCES users(user_id)
+);</code></pre>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             REPORT
+        ========================== -->
+
+        <section id="report" class="tab-content">
+
+            <div class="card">
+
+                <h2>Design Report</h2>
+
+                <div class="report-card">
+
+                    <h3>1. Scenario</h3>
+
+                    <p>
+                        The Fitness Workout Tracker Management System
+                        was designed to help users record and manage
+                        their workout activities. It stores workout
+                        routines, exercises, workout logs, workout sets,
+                        and fitness progress in an organized relational
+                        database.
+                    </p>
+
+
+                    <h3>2. Database Purpose</h3>
+
+                    <p>
+                        The purpose of the database is to organize
+                        fitness-related information and make workout
+                        records easier to manage and monitor.
+                    </p>
+
+
+                    <h3>3. Database Tables</h3>
+
+                    <ul>
+                        <li>Users</li>
+                        <li>Exercises</li>
+                        <li>Workout Routines</li>
+                        <li>Routine Exercises</li>
+                        <li>Workout Logs</li>
+                        <li>Workout Sets</li>
+                        <li>User Progress</li>
+                    </ul>
+
+
+                    <h3>4. Normalization</h3>
+
+                    <p>
+                        The database follows First Normal Form,
+                        Second Normal Form, and Third Normal Form.
+                        This helps reduce duplicate information
+                        and keeps the data organized.
+                    </p>
+
+
+                    <h3>5. Relationships</h3>
+
+                    <ul>
+                        <li>
+                            One user can have many workout routines.
+                        </li>
+
+                        <li>
+                            One user can have many workout logs.
+                        </li>
+
+                        <li>
+                            One workout routine can contain many exercises.
+                        </li>
+
+                        <li>
+                            One exercise can be included in many routines.
+                        </li>
+
+                        <li>
+                            One workout log can contain many workout sets.
+                        </li>
+
+                        <li>
+                            One exercise can appear in many workout sets.
+                        </li>
+
+                        <li>
+                            One user can have many progress records.
+                        </li>
+                    </ul>
+
+
+                    <h3>6. Conclusion</h3>
+
+                    <p>
+                        The Fitness Workout Tracker database provides
+                        a structured way to store and organize workout
+                        information. Through normalization and
+                        relationships between tables, the system can
+                        manage fitness data while reducing unnecessary
+                        duplication.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="./index.js"></script>
+
+</body>
+
+</html>
